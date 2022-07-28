@@ -32,4 +32,8 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    # blueprint for auth routes in our app
+    from .produto import produto as produto_blueprint
+    app.register_blueprint(produto_blueprint)
+
     return app
