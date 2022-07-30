@@ -8,9 +8,28 @@ produto = Blueprint('produto', __name__)
 @produto.route('/produtos')
 @login_required
 def listagem():
-    return 'Listagem'
+    produtos = Product.query
+    return render_template('produto_listagem.html', title='Produto \ Listagem', produtos=produtos)
 
 @produto.route('/produtos/cadastro')
 @login_required
 def cadastro():
-    return 'Cadastro de produto'    
+    return render_template('produto_cadastro.html')
+
+@produto.route('/produtos/add', methods=('GET', 'POST'))
+@login_required
+def create():
+    
+    descricao = request.form.get('descricao')
+    valor = request.form.get('valor')
+
+    if not descricao:
+        flash('Descricao is required!')
+    elif not valor:
+        flash('Valor is required!')
+    else:
+        messages = []
+        messages.append({'descricao': descricao, 'valor': valor})
+        return redirect(url_for('produto.create'))
+
+    return redirect(url_for('produto.create'))
