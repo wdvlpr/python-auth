@@ -30,6 +30,10 @@ def create():
     else:
         messages = []
         messages.append({'descricao': descricao, 'valor': valor})
-        return redirect(url_for('produto.create'))
+        prod = Product(descricao=descricao, valor=valor)
+        db.session.add(prod)
+        db.session.commit()
+        return 'Ak1'
+        #return redirect(url_for('produto.create'))
 
     return redirect(url_for('produto.create'))
