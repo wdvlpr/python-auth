@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, login_required
+from flask_login import login_required
 from .models import Product
 from . import db
 
@@ -28,12 +28,10 @@ def create():
     elif not valor:
         flash('Valor is required!')
     else:
-        messages = []
-        messages.append({'descricao': descricao, 'valor': valor})
+        flash('Cadastro efetuado com sucesso!')
         prod = Product(descricao=descricao, valor=valor)
         db.session.add(prod)
         db.session.commit()
-        return 'Ak1'
-        #return redirect(url_for('produto.create'))
+        return render_template('produto_cadastro.html',descricao=descricao, valor=valor)
 
-    return redirect(url_for('produto.create'))
+    return render_template('produto_cadastro.html')
