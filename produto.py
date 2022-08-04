@@ -9,7 +9,7 @@ produto = Blueprint('produto', __name__)
 @login_required
 def listagem():
     produtos = Product.query
-    return render_template('produto_listagem.html', title='Produto \ Listagem', produtos=produtos)
+    return render_template('produto_listagem.html', title='Listagem de produtos', produtos=produtos)
 
 @produto.route('/produtos/cadastro')
 @login_required
