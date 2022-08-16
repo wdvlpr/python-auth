@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col">
+    <h3 class="title">{{ title }}</h3>
+    <div class="row">
+      <a href="/produtos/cadastro" class="btn btn-success btn-sm float-right">Cadastrar NOVO</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="row">
+          <div class="notification is-danger">
+              {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+          </div>
+        </div>
+      {% endif %}
+    {% endwith %}
+    <div class="row">
+      <table id="data" class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for produto in produtos %}
+            <tr>
+              <td>{{ produto.idproduto }}</td>
+              <td>{{ produto.descricao }}</td>
+              <td>{{ produto.valor }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+{% endblock %}
